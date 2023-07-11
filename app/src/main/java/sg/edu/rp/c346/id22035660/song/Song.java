@@ -6,7 +6,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-public class Song {
+import java.io.Serializable;
+
+public class Song implements Serializable {
     private int id;
     private String title;
     private String singers;
@@ -31,9 +33,21 @@ public class Song {
 
     public int getStars() { return stars; }
 
+    public void setTitle(String title) {
+        this.title = title;}
+
     @Override
     public String toString() {
         return "Title: " + title + "\nSingers: " + singers + "\nYear: " + year + "\nStars: " + stars;
     }
+    public void setSingers(String singers) {
+        this.singers = singers;}
+
+    public void setYear(int year) {
+        this.year = year;}
+
+    public void setStars(int stars) {
+        this.stars = stars;}
+
 
 }

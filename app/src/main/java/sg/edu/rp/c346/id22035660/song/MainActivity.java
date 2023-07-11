@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         rb3 = findViewById(R.id.radioButton3);
         rb4 = findViewById(R.id.radioButton4);
         rb5 = findViewById(R.id.radioButton5);
-        listView = findViewById(R.id.lv);
+
 
         dbHelper = new DBHelper(this);
 
@@ -63,15 +63,15 @@ public class MainActivity extends AppCompatActivity {
                 rb1.setChecked(true); // Reset the radio button selection
             }
         });
-
         btnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Song> songList = dbHelper.getAllSongs();
-                ArrayAdapter<Song> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, songList);
-                listView.setAdapter(adapter);
+                Intent intent = new Intent(MainActivity.this, secondActivity.class);
+                startActivity(intent);
             }
         });
+
+
     }
 
 
