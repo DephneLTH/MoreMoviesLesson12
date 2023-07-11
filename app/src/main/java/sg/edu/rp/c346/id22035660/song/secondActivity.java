@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class secondActivity extends AppCompatActivity {
     Button btnShowSongs;
-    ListView lv;
+    ListView listview;
     DBHelper dbHelper;
     ArrayAdapter arrayAdapter;
 
@@ -27,15 +27,15 @@ public class secondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         btnShowSongs = findViewById(R.id.btnShowSongs);
-        lv = findViewById(R.id.lv);
+        listview = findViewById(R.id.lv);
 
         dbHelper = new DBHelper(this);
 
         ArrayList<Song> songArrayList = dbHelper.getAllSongs();
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, songArrayList);
-        lv.setAdapter(arrayAdapter);
+        listview.setAdapter(arrayAdapter);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView <?> parent, View view,int position, long id){
                 Song clickedSong = (Song) parent.getItemAtPosition(position);
