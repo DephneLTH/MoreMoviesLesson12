@@ -17,7 +17,7 @@ public class secondActivity extends AppCompatActivity {
     Button btnShowSongs;
     ListView listview;
     DBHelper dbHelper;
-    ArrayAdapter arrayAdapter;
+    ArrayAdapter<Song> arrayAdapter;
 
 
     @SuppressLint("MissingInflatedId")
@@ -32,7 +32,7 @@ public class secondActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         ArrayList<Song> songArrayList = dbHelper.getAllSongs();
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, songArrayList);
+        arrayAdapter = new CustomAdapter(this, R.layout.row, songArrayList);
         listview.setAdapter(arrayAdapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

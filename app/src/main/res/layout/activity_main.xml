@@ -57,7 +57,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
-        android:id="@+id/tvStars"
+        android:id="@+id/Stars"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/stars"

@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     private int getSelectedStars() {
         if (rb1.isChecked()) {
             return 1;
