@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">Song</string>
-    <string name="songTitle">Song Title</string>
-    <string name="singers">Singers</string>
+    <string name="movieTitle">Movie Title</string>
+    <string name="genre">Genre</string>
     <string name="year">Year</string>
-    <string name="stars">Stars</string>
-    <string name="rb1">1</string>
-    <string name="rb2">2</string>
-    <string name="rb3">3</string>
-    <string name="rb4">4</string>
-    <string name="rb5">5</string>
+    <string name="ratings">Rating</string>
+
+    <string-array name="ratings_array">
+        <item>G</item>
+        <item>PG</item>
+        <item>PG13</item>
+        <item>NC16</item>
+        <item>M18</item>
+        <item>R21</item>
+    </string-array>
 
 </resources>

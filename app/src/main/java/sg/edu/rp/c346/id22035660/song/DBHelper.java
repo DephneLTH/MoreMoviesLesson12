@@ -5,11 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Movie;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -17,14 +16,14 @@ public class DBHelper extends SQLiteOpenHelper {
     // increment by 1 whenever db schema changes.
     private static final int DATABASE_VER = 1;
     // Filename of the database
-    private static final String DATABASE_NAME = "songs.db";
+    private static final String DATABASE_NAME = "movies.db";
 
-    private static final String TABLE_SONG = "Song";
+    private static final String TABLE_MOVIE = "Movie";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_TITLE = "title";
-    private static final String COLUMN_SINGERS = "singers";
+    private static final String COLUMN_GENRE = "genre";
     private static final String COLUMN_YEAR = "year";
-    private static final String COLUMN_STARS = "stars";
+    private static final String COLUMN_RATING = "rating";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VER);
@@ -32,100 +31,55 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableSql = "CREATE TABLE " + TABLE_SONG + "("
+        String createTableSql = "CREATE TABLE " + TABLE_MOVIE + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_TITLE + " TEXT,"
-                + COLUMN_SINGERS + " TEXT,"
+                + COLUMN_GENRE + " TEXT,"
                 + COLUMN_YEAR + " INTEGER, "
-                + COLUMN_STARS + " INTEGER )";
+                + COLUMN_RATING + " TEXT )";
         db.execSQL(createTableSql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SONG);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MOVIE);
         // Create table(s) again
         onCreate(db);
     }
 
-    public void insertSong(String title, String singers, int year, int stars) {
+    public void insertMovie(String title, String genre, int year, String rating) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, title);
-        values.put(COLUMN_SINGERS, singers);
+        values.put(COLUMN_GENRE, genre);
         values.put(COLUMN_YEAR, year);
-        values.put(COLUMN_STARS, stars);
-        db.insert(TABLE_SONG, null, values);
+        values.put(COLUMN_RATING, rating);
+        db.insert(TABLE_MOVIE, null, values);
         db.close();
     }
 
-    public ArrayList<Song> getAllSongs() {
-        ArrayList<Song> songList = new ArrayList<>();
-
+    public ArrayList<Movie> getAllMovies() {
+        ArrayList<Movie> movieList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_SONG, null, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_MOVIE, null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
                 String title = cursor.getString(cursor.getColumnIndex(COLUMN_TITLE));
-                String singers = cursor.getString(cursor.getColumnIndex(COLUMN_SINGERS));
+                String genre = cursor.getString(cursor.getColumnIndex(COLUMN_GENRE));
                 int year = cursor.getInt(cursor.getColumnIndex(COLUMN_YEAR));
-                int stars = cursor.getInt(cursor.getColumnIndex(COLUMN_STARS));
+                String rating = cursor.getString(cursor.getColumnIndex(COLUMN_RATING));
 
-                Song song = new Song(id, title, singers, year, stars);
-                songList.add(song);
+                Movie movie = new movie(id, title, genre, year, rating);
+                movieList.add(movie);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
-        return songList;
+        return movieList;
     }
-    public ArrayList<Song> getSongWith5Star() {
-
-        ArrayList<Song> songList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String selection = COLUMN_STARS + " = ?";
-        String[] selectionArgs = {"5"};
-        Cursor cursor = db.query(TABLE_SONG, null, selection, selectionArgs, null, null, null);
-        if (cursor.moveToFirst()) {
-            do {
-                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
-                String title = cursor.getString(cursor.getColumnIndex(COLUMN_TITLE));
-                String singers = cursor.getString(cursor.getColumnIndex(COLUMN_SINGERS));
-                int year = cursor.getInt(cursor.getColumnIndex(COLUMN_YEAR));
-                int stars = cursor.getInt(cursor.getColumnIndex(COLUMN_STARS));
-                Song song = new Song(id, title, singers, year, stars);
-                songList.add(song);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-        return songList;
-    }
-
-    public void updateSong(Song song) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_TITLE, song.getTitle());
-        values.put(COLUMN_SINGERS, song.getSingers());
-        values.put(COLUMN_YEAR, song.getYear());
-        values.put(COLUMN_STARS, song.getStars());
-        String selection = COLUMN_ID + " = ?";
-        String[] selectionArgs = {String.valueOf(song.getId())};
-        db.update(TABLE_SONG, values, selection, selectionArgs);
-        db.close();
-    }
-
-    public void deleteSong(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String selection = COLUMN_ID + " = ?";
-        String[] selectionArgs = {String.valueOf(id)};
-        db.delete(TABLE_SONG, selection, selectionArgs);
-        db.close();
 }
-}
+
 

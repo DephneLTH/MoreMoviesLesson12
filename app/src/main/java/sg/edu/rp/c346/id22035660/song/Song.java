@@ -11,43 +11,55 @@ import java.io.Serializable;
 public class Song implements Serializable {
     private int id;
     private String title;
-    private String singers;
+    private String genre;
     private int year;
-    private int stars;
+    private int rating;
 
-    public Song(int id, String title, String singers, int year, int stars) {
+    public Song(int id, String title, String genre, int year, int rating) {
         this.id = id;
         this.title = title;
-        this.singers = singers;
+        this.genre = genre;
         this.year = year;
-        this.stars = stars;
+        this.rating = rating;
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getTitle() { return title; }
+    public String getTitle() {
+        return title;
+    }
 
-    public String getSingers() { return singers; }
+    public String getGenre() {
+        return genre;
+    }
 
-    public int getYear() { return year; }
+    public int getYear() {
+        return year;
+    }
 
-    public int getStars() { return stars; }
+    public int getRating() {
+        return rating;
+    }
 
     public void setTitle(String title) {
-        this.title = title;}
+        this.title = title;
+    }
 
     @Override
     public String toString() {
-        return "Title: " + title + "\nSingers: " + singers + "\nYear: " + year + "\nStars: " + stars;
+        return "Title: " + title + "\nGenre: " + genre + "\nYear: " + year + "\nRating: " + rating;
     }
-    public void setSingers(String singers) {
-        this.singers = singers;}
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
     public void setYear(int year) {
-        this.year = year;}
+        this.year = year;
+    }
 
-    public void setStars(int stars) {
-        this.stars = stars;}
-
-
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 }

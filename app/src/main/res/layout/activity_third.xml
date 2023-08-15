@@ -8,73 +8,68 @@
     tools:context=".ThirdActivity">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Title" />
+        android:text="Title"
+        android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/etTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:inputType="text"
+        android:hint="Enter song title" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Genre"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/etGenre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter genre"
         android:inputType="text" />
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Singers" />
+        android:text="Year"
+        android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/etYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text" />
+        android:inputType="number"
+        android:hint="Enter year" />
 
     <TextView
-        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Year" />
+        android:text="Rating"
+        android:textStyle="bold"/>
 
-    <EditText
-        android:id="@+id/editTextText3"
+    <Spinner
+        android:id="@+id/spinnerRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" />
+        android:layout_marginTop="16dp"
+        android:entries="@array/movie_ratings"
+        android:spinnerMode="dropdown" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/updateBtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Stars" />
+        android:text="Update" />
 
-    <EditText
-        android:id="@+id/editTextText4"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text" />
+        android:text="Delete" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="UPDATE" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="DELETE" />
-    </LinearLayout>
 </LinearLayout>

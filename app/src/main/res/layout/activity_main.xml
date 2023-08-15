@@ -2,130 +2,106 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
     <TextView
-        android:id="@+id/tvSongTitle"
+        android:id="@+id/tvMovieTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/songTitle"
-        android:textStyle="bold" />
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:text="Movie title"
+        android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/etSongTitle"
+        android:id="@+id/etMovie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.1"
         android:ems="10"
-        android:hint="Enter song title here"
-        android:inputType="text"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:hint="Enter movie title here"
+        android:inputType="text" />
 
     <TextView
-        android:id="@+id/tvSingers"
+        android:id="@+id/tvGenre"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/singers"
-        android:textStyle="bold" />
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:text="Genre"
+        android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/etSingers"
+        android:id="@+id/etGenre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.1"
         android:ems="10"
-        android:hint="Enter singers' name here"
-        android:inputType="text"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:hint="Enter genre here"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/tvYear"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/year"
-        android:textStyle="bold" />
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:text="Years"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/etYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.1"
         android:ems="10"
-        android:hint="Enter year of release here"
         android:inputType="text"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:hint="Enter year of release here" />
 
     <TextView
-        android:id="@+id/Stars"
+        android:id="@+id/tvRating"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stars"
-        android:textStyle="bold" />
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:text="Rating"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <RadioGroup
-            android:id="@+id/rdGroup"
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rb1" />
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rb2" />
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rb3" />
-
-            <RadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rb4" />
-
-            <RadioButton
-                android:id="@+id/radioButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rb5" />
-        </RadioGroup>
-
+            android:layout_height="51dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:id="@+id/InsertBtn"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="INSERT" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="SHOW LIST" />
-
     </LinearLayout>
 
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4" />
 </LinearLayout>

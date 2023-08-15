@@ -2,7 +2,6 @@ package sg.edu.rp.c346.id22035660.song;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,61 +9,91 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-public class secondActivity extends AppCompatActivity {
-    Button btnShowSongs;
-    ListView listview;
+public class MovieListActivity extends AppCompatActivity {
+
+    ListView lv;
+    Spinner yearSpinner;
+    Button pg13Button;
+    CustomAdapter adapter;
     DBHelper dbHelper;
-    ArrayAdapter<Song> arrayAdapter;
 
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
-
-        btnShowSongs = findViewById(R.id.btnShowSongs);
-        listview = findViewById(R.id.lv);
+        setContentView(R.layout.activity_movie_list);
 
         dbHelper = new DBHelper(this);
 
-        ArrayList<Song> songArrayList = dbHelper.getAllSongs();
-        arrayAdapter = new CustomAdapter(this, R.layout.row, songArrayList);
-        listview.setAdapter(arrayAdapter);
+        lv = findViewById(R.id.list);
+        yearSpinner = findViewById(R.id.yearSpinner);
+        pg13Button = findViewById(R.id.pg13Button);
 
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ArrayList<Movies> movieList = dbHelper.getAllMovies();
+        adapter = new CustomAdapter(this, R.layout.row, movieList);
+
+        lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick (AdapterView <?> parent, View view,int position, long id){
-                Song clickedSong = (Song) parent.getItemAtPosition(position);
-                Intent intent = new Intent(secondActivity.this,
-                        ThirdActivity.class);
-                intent.putExtra("song", clickedSong);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Movies clickedMovie = movieList.get(position);
+                int selectedRating = clickedMovie.getRating(); // Get the selected rating from the clicked movie
+                Intent intent = new Intent(MovieListActivity.this, ThirdActivity.class);
+                intent.putExtra("movie", clickedMovie);
+                intent.putExtra("rating", selectedRating); // Pass the selected rating as an extra
                 startActivity(intent);
             }
         });
 
-        btnShowSongs.setOnClickListener(new View.OnClickListener() {
+
+        pg13Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Song> fivestar = dbHelper.getSongWith5Star();
-                arrayAdapter.clear();
-                arrayAdapter.addAll(fivestar);
-                arrayAdapter.notifyDataSetChanged();
+                ArrayList<Movies> pg13List = dbHelper.getAllMoviesWithRating(DBHelper.RATING_PG13);
+                adapter.clear();
+                adapter.addAll(pg13List);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        // Populate the Spinner with unique years from the movie list
+        ArrayList<Integer> uniqueYears = dbHelper.getUniqueYears();
+        ArrayAdapter<Integer> yearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, uniqueYears);
+        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yearSpinner.setAdapter(yearAdapter);
+
+        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int selectedYear = (int) parent.getItemAtPosition(position);
+                ArrayList<Movies> filteredList = dbHelper.getMoviesByYear(selectedYear);
+                adapter.clear();
+                adapter.addAll(filteredList);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
-        protected void onResume() {
-            super.onResume();
-            ArrayList<Song> songList = dbHelper.getAllSongs();
-            arrayAdapter.clear();
-            arrayAdapter.addAll(songList);
-            arrayAdapter.notifyDataSetChanged();
 
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Reload the updated movie list from the database
+        ArrayList<Movies> movieList = dbHelper.getAllMovies();
+        adapter.clear();
+        adapter.addAll(movieList);
+        adapter.notifyDataSetChanged();
     }
+}
+
+
 
 
 
