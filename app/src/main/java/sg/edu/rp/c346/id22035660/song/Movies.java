@@ -1,21 +1,15 @@
 package sg.edu.rp.c346.id22035660.song;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
 import java.io.Serializable;
 
-public class Song implements Serializable {
+public class Movies implements Serializable {
     private int id;
     private String title;
     private String genre;
     private int year;
-    private int rating;
+    private String rating;
 
-    public Song(int id, String title, String genre, int year, int rating) {
+    public Movies(int id, String title, String genre, int year, String rating) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -39,7 +33,7 @@ public class Song implements Serializable {
         return year;
     }
 
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
 
@@ -59,7 +53,7 @@ public class Song implements Serializable {
         this.year = year;
     }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 }

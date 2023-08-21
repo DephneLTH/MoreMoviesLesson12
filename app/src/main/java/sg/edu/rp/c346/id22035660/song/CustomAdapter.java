@@ -36,11 +36,11 @@ public class CustomAdapter extends ArrayAdapter<Movies> {
 
         Movies movie = movieList.get(position);
 
-        ImageView movieImage = view.findViewById(R.id.imageView);
-        TextView movieTitle = view.findViewById(R.id.movieTitle);
-        TextView movieYear = view.findViewById(R.id.movieYear);
+        ImageView movieImage = view.findViewById(R.id.ivRating);
+        TextView movieTitle = view.findViewById(R.id.tvMovieTitle);
+        TextView movieYear = view.findViewById(R.id.tvYear);
 
-        TextView movieGenre = view.findViewById(R.id.movieGenre);
+        TextView movieGenre = view.findViewById(R.id.tvGenre);
 
         movieImage.setImageResource(getRatingImageResource(movie.getRating()));
         movieTitle.setText(movie.getTitle());
@@ -50,21 +50,21 @@ public class CustomAdapter extends ArrayAdapter<Movies> {
         return view;
     }
 
-    private int getRatingImageResource(int rating) {
-        if (rating == DBHelper.RATING_G) {
+    private int getRatingImageResource(String rating) {
+        if (rating.equals("G")) {
             return R.drawable.rating_g;
-        } else if (rating == DBHelper.RATING_PG) {
+        } else if (rating.equals("PG")) {
             return R.drawable.rating_pg;
-        } else if (rating == DBHelper.RATING_PG13) {
+        } else if (rating.equals("PG13")) {
             return R.drawable.rating_pg13;
-        } else if (rating == DBHelper.RATING_NC16) {
+        } else if (rating.equals("NC16")) {
             return R.drawable.rating_nc16;
-        } else if (rating == DBHelper.RATING_M18) {
+        } else if (rating.equals("M18")) {
             return R.drawable.rating_m18;
-        } else if (rating == DBHelper.RATING_R21) {
+        } else if (rating.equals("R21")) {
             return R.drawable.rating_r21;
         } else {
-            return R.drawable.download; // Replace this with your default rating image
+            return R.drawable.rating_g; // Replace this with your default rating image
         }
     }
 }

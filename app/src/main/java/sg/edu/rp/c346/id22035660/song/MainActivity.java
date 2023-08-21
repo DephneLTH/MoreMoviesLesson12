@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etMovieTitle = findViewById(R.id.etMovieTitle);
+        etMovieTitle = findViewById(R.id.etMovie);
         etGenre = findViewById(R.id.etGenre);
         etYear = findViewById(R.id.etYear);
-        btnInsert = findViewById(R.id.button);
+        btnInsert = findViewById(R.id.InsertBtn);
         btnShowList = findViewById(R.id.button2);
         spinnerRatings = findViewById(R.id.spinner);
 
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         btnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MovieAdapter.class);
+                Intent intent = new Intent(MainActivity.this, MovieListActivity.class);
                 startActivity(intent);
             }
         });

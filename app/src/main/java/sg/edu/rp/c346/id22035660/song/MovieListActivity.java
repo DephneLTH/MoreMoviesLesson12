@@ -33,7 +33,7 @@ public class MovieListActivity extends AppCompatActivity {
         pg13Button = findViewById(R.id.pg13Button);
 
         ArrayList<Movies> movieList = dbHelper.getAllMovies();
-        adapter = new CustomAdapter(this, R.layout.row, movieList);
+        adapter = new CustomAdapter(this, R.layout.row_movie, movieList);
 
         lv.setAdapter(adapter);
 
@@ -41,7 +41,7 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Movies clickedMovie = movieList.get(position);
-                int selectedRating = clickedMovie.getRating(); // Get the selected rating from the clicked movie
+                String selectedRating = clickedMovie.getRating(); // Get the selected rating from the clicked movie
                 Intent intent = new Intent(MovieListActivity.this, ThirdActivity.class);
                 intent.putExtra("movie", clickedMovie);
                 intent.putExtra("rating", selectedRating); // Pass the selected rating as an extra
@@ -53,10 +53,10 @@ public class MovieListActivity extends AppCompatActivity {
         pg13Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Movies> pg13List = dbHelper.getAllMoviesWithRating(DBHelper.RATING_PG13);
-                adapter.clear();
-                adapter.addAll(pg13List);
-                adapter.notifyDataSetChanged();
+//                ArrayList<Movies> pg13List = dbHelper.getAllMoviesWithRating();
+//                adapter.clear();
+//                adapter.addAll(pg13List);
+//                adapter.notifyDataSetChanged();
             }
         });
 
@@ -70,7 +70,7 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int selectedYear = (int) parent.getItemAtPosition(position);
-                ArrayList<Movies> filteredList = dbHelper.getMoviesByYear(selectedYear);
+                ArrayList<Movies> filteredList = dbHelper.getAllMoviesByYear(selectedYear);
                 adapter.clear();
                 adapter.addAll(filteredList);
                 adapter.notifyDataSetChanged();

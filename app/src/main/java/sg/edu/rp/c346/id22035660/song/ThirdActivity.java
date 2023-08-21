@@ -43,7 +43,7 @@ public class ThirdActivity extends AppCompatActivity {
 
         int selectedRating = intent.getIntExtra("rating", 0); // Get the selected rating from the intent extras
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(
-                this, R.array.movie_ratings, android.R.layout.simple_spinner_item);
+                this, R.array.ratings_array, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRating.setAdapter(spinnerAdapter);
 
@@ -52,16 +52,15 @@ public class ThirdActivity extends AppCompatActivity {
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = editTitle.getText().toString().trim();
-                String genre = editGenre.getText().toString().trim();
-                int year = Integer.parseInt(editYear.getText().toString().trim());
-                int rating = spinnerRating.getSelectedItemPosition() + 1; // +1 because the array index starts from 0
-                selectedMovie.setRating(rating);
+                String title = etTitle.getText().toString().trim();
+                String genre = etGenre.getText().toString().trim();
+                int year = Integer.parseInt(etYear.getText().toString().trim());
+//                int rating = spinnerRating.getSelectedItemPosition() + 1; // +1 because the array index starts from 0
+                selectedMovie.setRating(spinnerRating.getSelectedItem().toString());
 
                 selectedMovie.setTitle(title);
                 selectedMovie.setGenre(genre);
                 selectedMovie.setYear(year);
-                selectedMovie.setRating(rating);
 
                 dbHelper.updateMovie(selectedMovie);
 
